@@ -44,18 +44,40 @@ public class User {
     public static RegistrationDto invalidLogin(){
         Faker faker = new Faker(new Locale("en"));
         String login = faker.name().firstName();
+        String invalidLogin = faker.name().firstName();
         String password = faker.internet().password();
         String status = "active";
-        RegistrationDto user = new RegistrationDto(login, password, "active");
-        return user;
+        RegistrationDto user = new RegistrationDto(login, password, status);
+        return new RegistrationDto(invalidLogin, password, status);
     }
 
     public static RegistrationDto invalidPassword(){
         Faker faker = new Faker(new Locale("en"));
         String login = faker.name().firstName();
         String password = faker.internet().password();
+        String invalidPassword = faker.internet().password();
         String status = "active";
-        RegistrationDto user = new RegistrationDto(login,password, "active");
-        return user;
+        RegistrationDto user = new RegistrationDto(login,password, status);
+        return new RegistrationDto(login, invalidPassword, status);
+    }
+
+    public static RegistrationDto invalidLoginBlockedUser(){
+        Faker faker = new Faker(new Locale("en"));
+        String login = faker.name().firstName();
+        String invalidLogin = faker.name().firstName();
+        String password = faker.internet().password();
+        String status = "blocked";
+        RegistrationDto user = new RegistrationDto(login, password, status);
+        return new RegistrationDto(invalidLogin, password, status);
+    }
+
+    public static RegistrationDto invalidPasswordBlockedUser(){
+        Faker faker = new Faker(new Locale("en"));
+        String login = faker.name().firstName();
+        String password = faker.internet().password();
+        String invalidPassword = faker.internet().password();
+        String status = "blocked";
+        RegistrationDto user = new RegistrationDto(login,password, status);
+        return new RegistrationDto(login, invalidPassword, status);
     }
 }

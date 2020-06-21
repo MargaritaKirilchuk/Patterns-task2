@@ -57,7 +57,6 @@ public class RegistrationTest {
 
     @Test
     void shouldNotRegisterWithInvalidLogin(){
-        RegistrationDto activeUser = activeUser();
         RegistrationDto invalidLogin = invalidLogin();
         $("[name='login']").setValue(invalidLogin.getLogin());
         $("[name='password']").setValue(invalidLogin.getPassword());
@@ -67,7 +66,6 @@ public class RegistrationTest {
 
     @Test
     void shouldNotRegisterWithInvalidPassword(){
-        RegistrationDto activeUser = activeUser();
         RegistrationDto invalidPassword = invalidPassword();
         $("[name='login']").setValue(invalidPassword.getLogin());
         $("[name='password']").setValue(invalidPassword.getPassword());
@@ -77,20 +75,18 @@ public class RegistrationTest {
 
     @Test
     void shouldNotRegisterWithInvalidLoginBlockedUser(){
-        RegistrationDto blockedUser = blockedUser();
-        RegistrationDto invalidLogin = invalidLogin();
-        $("[name='login']").setValue(invalidLogin.getLogin());
-        $("[name='password']").setValue(invalidLogin.getPassword());
+        RegistrationDto invalidLoginBlockedUser = invalidLoginBlockedUser();
+        $("[name='login']").setValue(invalidLoginBlockedUser().getLogin());
+        $("[name='password']").setValue(invalidLoginBlockedUser().getPassword());
         $$("button").find(exactText("Продолжить")).click();
         $(withText("Неверно указан логин или пароль")).waitUntil(visible, 15000);
     }
 
     @Test
     void shouldNotRegisterWithInvalidPasswordBlockedUser(){
-        RegistrationDto blockedUser = blockedUser();
-        RegistrationDto invalidPassword = invalidPassword();
-        $("[name='login']").setValue(invalidPassword.getLogin());
-        $("[name='password']").setValue(invalidPassword.getPassword());
+        RegistrationDto invalidPasswordBlockedUser = invalidPasswordBlockedUser();
+        $("[name='login']").setValue(invalidPasswordBlockedUser.getLogin());
+        $("[name='password']").setValue(invalidPasswordBlockedUser.getPassword());
         $$("button").find(exactText("Продолжить")).click();
         $(withText("Неверно указан логин или пароль")).waitUntil(visible, 15000);
     }
